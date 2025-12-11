@@ -1,0 +1,33 @@
+# 1. Create venv (skip pip to avoid error)
+python -m venv venv --without-pip
+
+# 2. Activate venv (use isolated environment)
+source venv/Scripts/activate
+
+# 3. Install pip (needed for package management)
+python -m ensurepip
+
+# 4. Upgrade pip (get latest version)
+python -m pip install --upgrade pip
+
+# 5. Install all dependencies (LangChain, HuggingFace, etc.)              ///// ADD ALL DEPENDENCIES IN requirement.txt in 1 line each word
+pip install langchain langchain-core langchain-openai openai langchain-community transformers huggingface-hub sentence-transformers torch accelerate python-dotenv numpy scikit-learn
+
+# 6. Verify (check installed packages)
+pip list | grep -E "langchain|transformers|torch"
+
+
+
+
+
+
+
+
+
+For next time (daily work):
+
+# Activate existing venv
+source venv/Scripts/activate
+
+# Deactivate when done
+deactivate
