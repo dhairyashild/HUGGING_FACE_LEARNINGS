@@ -12,6 +12,40 @@ python -m pip install --upgrade pip
 
 # 5. Install all dependencies (LangChain, HuggingFace, etc.)              ///// ADD ALL DEPENDENCIES IN requirement.txt in 1 line each word
 pip install langchain langchain-core langchain-openai openai langchain-community transformers huggingface-hub sentence-transformers torch accelerate python-dotenv numpy scikit-learn
+vi requirements.txt
+# LangChain Core
+langchain
+langchain-core
+
+# OpenAI Integration
+langchain-openai
+openai
+
+# Anthropic Integration
+langchain-anthropic
+
+# Google Gemini (PaLM) Integration
+langchain-google-genai
+google-generativeai
+
+# Hugging Face Integration
+langchain-huggingface  # REQUIRED for ChatHuggingFace import
+transformers
+huggingface-hub
+sentence-transformers
+
+# Environment Variable Management
+python-dotenv
+
+# Machine Learning Utilities
+numpy
+scikit-learn
+
+# Essential for LangChain projects
+langchain-community
+torch
+accelerate
+
 
 # 6. Verify (check installed packages)
 pip list | grep -E "langchain|transformers|torch"
@@ -20,7 +54,13 @@ pip list | grep -E "langchain|transformers|torch"
 from langchain_huggingface                import ChatHuggingFace,           HuggingFaceEndpoint
 #      ^^^^^^^^^^^^^^^^^^^                     ^^^^^^^^^^^^^^^              ^^^^^^^^^^^^^^^^^^^^
 #     snake_case(all lowercase)                 PascalCase                     PascalCase class
-#         module                                   class                            class                 
+#         module                                   class                            class              
+
+import → Module names (snake_case)
+
+from X import Y → Y can be PascalCase (classes) or snake_case (functions)
+
+
 
 1. snake_case
 user_input_data = lowercase with underscores.
