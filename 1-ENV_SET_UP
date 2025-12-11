@@ -17,15 +17,24 @@ pip install langchain langchain-core langchain-openai openai langchain-community
 pip list | grep -E "langchain|transformers|torch"
 
 
+from langchain_huggingface                import ChatHuggingFace,           HuggingFaceEndpoint
+#      ^^^^^^^^^^^^^^^^^^^                     ^^^^^^^^^^^^^^^              ^^^^^^^^^^^^^^^^^^^^
+#     snake_case(all lowercase)                 PascalCase                     PascalCase class
+#         module                                   class                            class                 
 
-
-
+1. snake_case
+user_input_data = lowercase with underscores.
+2. PascalCase
+UserInputData = first letter of each word capital.
+3. camelCase
+userInputData = first word lowercase, rest capital.
+4. SCREAMING_SNAKE_CASE
+USER_INPUT_DATA = uppercase with underscores.
 
 
 
 
 For next time (daily work):
-
 # Activate existing venv
 source venv/Scripts/activate
 
