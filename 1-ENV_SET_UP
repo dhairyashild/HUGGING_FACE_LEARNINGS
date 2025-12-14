@@ -10,6 +10,27 @@ python -m ensurepip
 # 4. Upgrade pip (get latest version)
 python -m pip install --upgrade pip
 
+
+#######################   ON UBUNTU ABOVE PYTHON NOT WORK NEED PYTHON 3 SO BELOW USE      ##############################
+# First, install python3-venv if not already installed
+sudo apt update
+sudo apt install python3-venv -y
+
+# 1. Create venv using python3
+python3 -m venv venv --without-pip
+
+# 2. Activate venv (correct path for Linux)
+source venv/bin/activate
+
+# 3. Install pip
+python3 -m ensurepip
+
+# 4. Upgrade pip
+python3 -m pip install --upgrade pip
+###################################################################################################################
+
+
+
 # 5. Install all dependencies (LangChain, HuggingFace, etc.)              ///// ADD ALL DEPENDENCIES IN requirement.txt in 1 line each word
 pip install langchain langchain-core langchain-openai openai langchain-community transformers huggingface-hub sentence-transformers torch accelerate python-dotenv numpy scikit-learn
 vi requirements.txt
