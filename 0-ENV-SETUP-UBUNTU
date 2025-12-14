@@ -1,0 +1,38 @@
+#!/bin/bash
+# setup.sh - Complete setup on Ubuntu
+
+echo "🔧 Setting up Python environment..."
+
+# 1. Install system dependencies
+sudo apt update
+sudo apt install python3-full python3-pip python3-venv -y
+
+# 2. Create and activate virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# 3. Upgrade pip
+pip install --upgrade pip
+
+# 4. Create requirements.txt
+cat > requirements.txt << 'EOF'
+langchain-core==0.2.0
+langchain==0.2.0
+langchain-huggingface==0.0.2
+huggingface-hub==0.23.0
+python-dotenv==1.0.0
+EOF
+
+# 5. Install packages
+echo "📦 Installing packages..."
+pip install -r requirements.txt
+
+# 6. Verify installation
+echo "✅ Setup complete! Testing imports..."
+python3 -c "from langchain_huggingface import HuggingFaceEndpoint; print('✅ LangChain-HuggingFace installed successfully!')"
+
+echo ""
+echo "🚀 Next steps:"
+echo "1. Create .env file with: HUGGINGFACEHUB_API_TOKEN=your_token"
+echo "2. Create run.py with the working code"
+echo "3. Run: python3 run.py"
