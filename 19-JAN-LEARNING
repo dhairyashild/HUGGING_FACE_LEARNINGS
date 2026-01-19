@@ -1,0 +1,32 @@
+import os
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "hf_..."
+
+llm = HuggingFaceEndpoint(
+    repo_id="microsoft/Phi-3-mini-4k-instruct",
+    temperature=0.7,
+    max_length=1024,
+)
+model = ChatHuggingFace(llm=llm)
+---------------------------------------------------
+import os
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from decouple import config                                                       ##################### NEW 
+
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = config("HUGGINGFACEHUB_API_TOKEN")         ##################### CHANGE
+repo_id = "meta-llama/Llama-3.1-8B-Instruct"                                        ##################### U CAN GIVE HERE / DIRECT NAME IN BELOW BRACKET
+
+llm = HuggingFaceEndpoint(
+    repo_id= repo_id,
+    temperature=0.7,
+    max_new_tokens=1024,                                                        #####################  REPLACE ONLY 
+)
+model = ChatHuggingFace(llm=llm)
+ans= model.invoke("who is pm of pakistan")                                     #####################   NEW     
+print(ans.content)                                                            #####################    NEW
+---------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
