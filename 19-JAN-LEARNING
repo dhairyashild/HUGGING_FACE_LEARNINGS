@@ -15,7 +15,7 @@ from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from decouple import config                                                       ##################### NEW 
 
 os.environ["HUGGINGFACEHUB_API_TOKEN"] = config("HUGGINGFACEHUB_API_TOKEN")         ##################### CHANGE
-repo_id = "meta-llama/Llama-3.1-8B-Instruct"                                        ##################### U CAN GIVE HERE / DIRECT NAME IN BELOW BRACKET
+repo_id = "meta-llama/Llama-3.1-8B-Instruct"                                        ##################### U CAN GIVE HERE / DIRECT NAME IN BELOW BRACKET             ###### CHANGE  MODELS LIKE   HuggingFaceH4/zephyr-7b-beta   / mistralai/Mistral-7B-Instruct-v0.2 / meta-llama/Meta-Llama-3-8B-Instruct
 
 llm = HuggingFaceEndpoint(
     repo_id= repo_id,
