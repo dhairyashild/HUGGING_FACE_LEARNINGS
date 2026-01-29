@@ -51,12 +51,14 @@ ready_prompt=my_prompt.format(d1="pak",d2="india")
 responce==model.invoke(ready_prompt)
 print(responce.content)
 --------------------------------------------------------------------------------------------------------------------------------------------
-4) ChatPromptTemlate ===for multiple conversation
+4) ChatPromptTemlate ===for multiple conversation    ==THIS IS PROD WAY BELOW CODE USE IN PROD GPT
+# BELW CODE IN PROD CODE & RIGHT SIDE OTHER CODES U CAN REPLACE BUT THEY ARE EXTRA LINES FOR SIMPLE CAUSE SO DO NOT USE USE COMMENTED.
+
 
 from langchain_core.prompts import ChatPromptTemplate
-my_prompt= ChatPromptTemplate.from_messages([                      ###  ChatPromptTemplate([    # WORKS SAME, NO NEED OF  .from_messages            
-("system","act as helpful assistant and translate {ip_language} into {op_language}" ),           ##   (   "system" , "           "  ) 
-("user","{text}")                                                                                ##   (   "user"   , "           "  ) 
+my_prompt= ChatPromptTemplate([                     ###  ChatPromptTemplate.from_messages([      # WORKS SAME, NO NEED OF  .from_messages            
+("system","act as helpful assistant and translate {ip_language} into {op_language}" ),      ## REMEMBER   (   "system" , "           "  )   OR  SystemMessagePromptTemplate.from_template("act as helpful assistant...")  ==BOTH WORKS SAME
+("user","{text}")                                                                           ## REMEMBER   (   "user"   , "           "  )   OR  HumanMessagePromptTemplate.from_template("act as helpful assistant...")   ==BOTH WORKS SAME
                                                            
 ])
 
@@ -70,15 +72,22 @@ print(responce.content)
 
 
 #######################################################################################
+# HOW PROMPTS LOOK U CAN SEE BY BELOW CODE
 
-# how my prompt looks in above case see below code
 print(ready_prompt)
 --------------------->
 System: act as helpful assistant and translate english into marathi
 Human: i am king of world
 
 #######################################################################################
+### HOW I/P VAR LOOKS CHECK BY BELOW CODE
 
+print(my_prompt.input_variables)
+---------->
+['ip_language', 'op_language', 'text']
+
+#print(ready_prompt.input_variables)           ====THIS WONT WORK BECAUSE my_prompt.format() → RETURNS STR (no input_variables)
+#######################################################################################
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 
