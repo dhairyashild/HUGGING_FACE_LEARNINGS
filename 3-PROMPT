@@ -1,0 +1,135 @@
+from langchain_core.prompts import PromptTemplate
+
+1          my_prompt=             PromptTemplate(
+
+2          ready_prompt=            my_prompt.format(key="value",key2="value2")
+
+3          responce==model.invoke(ready_prompt)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+1)
+response = model.invoke("Why do parrots talk?")
+
+OR BELOW CODE SAME LIKE ABOVE JUST CREATES VAR AND GIVEN IN ANOTHER VAR MESSAGE
+
+system_msg = SystemMessage("You are a helpful assistant.")
+human_msg = HumanMessage("Hello, how are you?")
+# Use with chat models
+messages = [system_msg, human_msg]
+response = model.invoke(messages) 
+print(response.content) 
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+2)   
+from langchain_core.prompts import PromptTemplate             ## MUST            # WRONG=from langchain.prompts import PromptTemplate
+
+my_prompt= PromptTemplate(
+    input_variables=["desh"],template="who is pm of {desh}?")          # ERROR SOL= i/p var must be given here     ## I       T
+
+p= my_prompt.format(desh="pak")           # . format remember          # WRONG= { : } dont give this     +  only value "pak" in inverted
+r=model.invoke(p)
+print(r.content)
+
+################ OR BELOW CODE SAME LIKE ABOVE ############################
+WHEN WE HAVE ONLY PromptTemplate(            ==WE NEED input_variables WITH template          # see above code for this
+WHEN WE HAVE PromptTemplate.from_template(   == NOT NEED input_variables                      # see below code for this
+
+my_prompt = PromptTemplate.from_template("who is pm of {desh}?")
+ready_prompt= my_prompt.format(desh="pak")         
+responce==model.invoke(ready_prompt)
+print(r.content)
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+3) MULTIPLE INPUT
+
+from langchain_core.prompts import PromptTemplate
+my_prompt=PromptTemplate(
+    input_variables=["d1","d2"],template="who is pm of {d1} and {d2}"
+)
+
+ready_prompt=my_prompt.format(d1="pak",d2="india")
+responce==model.invoke(ready_prompt)
+print(responce.content)
+--------------------------------------------------------------------------------------------------------------------------------------------
+4) ChatPromptTemlate ===for multiple conversation
+
+from langchain_core.prompts import ChatPromptTemplate
+my_prompt= ChatPromptTemplate.from_messages([                      ###  ChatPromptTemplate([    # WORKS SAME, NO NEED OF  .from_messages            
+("system","act as helpful assistant and translate {ip_language} into {op_language}" ),           ##   (   "system" , "           "  ) 
+("user","{text}")                                                                                ##   (   "user"   , "           "  ) 
+                                                           
+])
+
+ready_prompt=my_prompt.format(
+ip_language="english",
+op_language="marathi",
+text="i am king of world"
+)
+responce= model.invoke(ready_prompt)
+print(responce.content)
+
+
+#######################################################################################
+
+# how my prompt looks in above case see below code
+print(ready_prompt)
+--------------------->
+System: act as helpful assistant and translate english into marathi
+Human: i am king of world
+
+#######################################################################################
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
