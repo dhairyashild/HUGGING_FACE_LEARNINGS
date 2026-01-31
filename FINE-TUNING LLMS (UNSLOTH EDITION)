@@ -5,18 +5,50 @@
 * **Fine-tuning (SFT):** Supervised Fine-Tuning; teaching a model a specific task using (Instruction -> Output) pairs.
 * **Quantization (4-bit):** Compressing weights from 16-bit to 4-bit. Reduces 3B model VRAM from 6GB+ to ~2.5GB.
 * **LoRA (Low-Rank Adaptation):** Freezes base weights and trains two tiny matrices ($A$ and $B$).
-* **Rank (r):** The width of LoRA matrices. $r=16$ is the standard for performance/memory balance.
+* **Rank (r):** The width of LoRA matrices A and B. $r=16$ is the standard for performance/memory balance.
+= A & B in LoRA fine-tuning: Tiny trainable matrices that multiply to fake weight changes.
+
+Rank (r) is:
+Columns in matrix A (d × r)
+Rows in matrix B (r × k)
+The shared "skinny" dimension that multiplies: B (r×k) × A (d×r) → ΔW (d×k)            
+
+
+Real-time:Frozen base: 
+= Original weights W0W0 stay unchanged (billions of params).
+= train only A (d×r) + B (r×k), compute h = (W₀ + BA)x each forward
+
+# Complete Simple Notes
+
+## Core Idea
+- Big model grid: 1000×1000 = **1M numbers** to train (slow!).
+- LoRA rank r=2: **A=1000×2** + **B=2×1000** = **4K numbers** (250x smaller!)
+- Multiply **B×A** fakes the big grid update ΔW
+
+## Matrix Size Comparison
+| Type | Dimensions | Numbers | Savings |
+|------|------------|---------|---------|
+| Full | 1000×1000  | 1M      | 100%    |
+| r=2  | A:1000×2 + B:2×1000 | 4K | 250x smaller |
+| r=8  | A:2500×8 + B:8×2500 | 40K | 156x smaller |
+
+## Why It Works
+- **r = "key directions"** of change needed
+- New tasks need only **2-64 simple patterns** (not millions)
+- Train **r(d+k)** params vs **dk** params
+
+## Real Example
+
 * **Alpha ($\alpha$):** Scaling factor for LoRA; usually $2 \times r$ to stabilize learning.
 * **Gradient Accumulation:** Summing gradients over multiple steps to simulate a large batch size on small GPUs.
 
 ---
 
 ## 2. THE FINE-TUNING HIERARCHY
-| Technique | VRAM Needed | Trainable Params | Industry Use-Case |
-| :--- | :--- | :--- | :--- |
-| **Full Fine-Tuning** | 80GB+ (A100) | 100% | Large Labs / Research |
-| **LoRA** | 16GB (T4) | ~0.1% - 1% | Corporate Production |
-| **QLoRA (Unsloth)** | **4GB - 8GB** 🔥 | ~0.1% - 1% | **Best for Interns/Laptops** |
+| Technique            | VRAM Needed       | Trainable Params | Industry Use-Case |
+| **Full Fine-Tuning** | 80GB+ (A100)      | 100%             | Large Labs / Research |
+| **LoRA**             | 16GB (T4)         | ~0.1% - 1%       | Corporate Production |
+| **QLoRA (Unsloth)**  | **4GB - 8GB** 🔥  | ~0.1% - 1%      | **Best for Interns/Laptops** |
 
 ---
 
