@@ -4,34 +4,33 @@
 # 8-STEP STANDARD • ANY MODEL • ANY DATASET • HF HUB/Ollama/LangChain READY
 # MARKED WITH # WHERE TO CHANGE FOR NEW PROJECTS
 # =============================================================================
-
-# =============================================================================
 # =============================================================================
 # STEP 0: DEPENDENCY VALIDATION & GPU OPTIMIZATION (Run Once)
-# Validates 7 critical packages exist, auto-optimizes GPU memory, prevents crashes
 # =============================================================================
 import sys, importlib.util, warnings, os, json, torch
 from datetime import datetime
 warnings.filterwarnings("ignore")
 
+# Install missing packages FIRST
 required = ['unsloth', 'trl', 'datasets', 'transformers', 'torch', 'accelerate', 'peft']
 missing = [pkg for pkg in required if importlib.util.find_spec(pkg) is None]
 
 if missing:
-    print("❌ MISSING: " + " ".join(missing))
-    print("\n📦 ONE-COMMAND FIX (copy & run):")
-    print("!pip install -q \\")
-    print("    \"unsloth[colab-new]@git+https://github.com/unslothai/unsloth.git\" \\")
-    print("    trl>=0.8.0 datasets>=2.18.0 transformers>=4.40.0 \\")
-    print("    accelerate>=0.27.0 peft>=0.10.0")
-    sys.exit(1)
+    print("❌ MISSING:", " ".join(missing))
+    print("\n📦 INSTALLING NOW...")
+    os.system('pip install -q "unsloth[colab-new]@git+https://github.com/unslothai/unsloth.git" trl>=0.8.0 datasets>=2.18.0 transformers>=4.40.0 accelerate>=0.27.0 peft>=0.10.0')
+    print("✅ INSTALLED! RESTART RUNTIME NOW.")
+    sys.exit(0)
 
+# GPU optimization
 if torch.cuda.is_available():
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.cuda.empty_cache()
-    print(f"✅ GPU: {torch.cuda.get_device_name(0)} ({torch.cuda.get_device_properties(0).total_memory/1e9:.1f}GB)")
+    print(f"✅ GPU READY: {torch.cuda.get_device_name(0)} ({torch.cuda.get_device_properties(0).total_memory/1e9:.1f}GB)")
 else:
     print("⚠️  No GPU - use Colab T4/A100")
+
+print("🚀 STEP 0 COMPLETE → PROCEED TO STEP 1!")
 
 # =============================================================================
 # STEP 1: PROJECT CONFIGURATION (CHANGE THESE 6 LINES ONLY)
