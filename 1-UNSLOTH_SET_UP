@@ -6,7 +6,9 @@
 # =============================================================================
 
 # =============================================================================
-# STEP 0: ENVIRONMENT SETUP (Run Once)
+# =============================================================================
+# STEP 0: DEPENDENCY VALIDATION & GPU OPTIMIZATION (Run Once)
+# Validates 7 critical packages exist, auto-optimizes GPU memory, prevents crashes
 # =============================================================================
 import sys, importlib.util, warnings, os, json, torch
 from datetime import datetime
