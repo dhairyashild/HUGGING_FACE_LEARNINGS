@@ -184,10 +184,33 @@ print("• LangChain: load_model('your-hf-repo')")
 
 
 
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ✅ YOUR UNIVERSAL 8-STEP CHECKLIST (2026 PRODUCTION)
 text
 STEP 1: Change 6 config lines → Model/Dataset/Columns
 STEP 2-8: Copy → Paste → RUN → Production model ready!
 ✅ WORKS FOR: Llama/Mistral/Phi/Gemma/Qwen + ANY dataset**
 ✅ OUTPUTS: Full model + LoRA + GGUF → Deploy anywhere! 🎯
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+✅ 8-STEP UNIVERSAL TEMPLATE ✓
+✅ ANY MODEL (Llama/Mistral/Phi/Gemma/Qwen) ✓
+✅ ANY DATASET (HF Hub/Custom/CSV) ✓  
+✅ PRODUCTION OUTPUTS (Full + LoRA + GGUF) ✓
+✅ HF HUB/Ollama/LangChain READY ✓
+✅ ERROR HANDLING & FALLBACKS ✓
+✅ VRAM AUTO-OPTIMIZATION ✓
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# YOUR FOREVER CHECKLIST (CHANGE ONLY 6 LINES)
+
+STEP 1: MODEL_NAME          = "your-model"           # 
+STEP 2: DATASET_PATH        = "your-dataset"         # 
+STEP 3: DATASET_CONFIG      = "v0"                   # 
+STEP 4: INPUT_COL           = "question"             # 
+STEP 5: OUTPUT_COL          = "answer"               # 
+STEP 6: OUTPUT_DIR          = "my-model"             # 
+STEP 7: MAX_STEPS           = 1000                   # 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
