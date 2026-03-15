@@ -21,7 +21,7 @@ print(response.content)
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 2)   
-from langchain_core.prompts import PromptTemplate             ## MUST            # WRONG=from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate    ## MUST   # WRONG=from langchain.prompts import PromptTemplate
 
 my_prompt= PromptTemplate(
     input_variables=["desh"],template="who is pm of {desh}?")          # ERROR SOL= i/p var must be given here     ## I       T
@@ -31,8 +31,8 @@ r=model.invoke(p)
 print(r.content)
 
 ################ OR BELOW CODE SAME LIKE ABOVE ############################
-WHEN WE HAVE ONLY PromptTemplate(            ==WE NEED input_variables WITH template          # see above code for this
-WHEN WE HAVE PromptTemplate.from_template(   == NOT NEED input_variables                      # see below code for this
+WHEN WE HAVE ONLY PromptTemplate(            ==WE NEED input_variables WITH template      # see above code for this
+WHEN WE HAVE PromptTemplate.from_template(   == NOT NEED input_variables                 # see below code for this
 
 my_prompt = PromptTemplate.from_template("who is pm of {desh}?")
 ready_prompt= my_prompt.format(desh="pak")         
