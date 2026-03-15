@@ -1,3 +1,51 @@
+4) ChatPromptTemplate ===for multiple conversation    ==THIS IS PROD WAY (UPDATED LCEL STANDARD) #
+
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder #CHANGED: Added MessagesPlaceholder
+from langchain_core.output_parsers import StrOutputParser #CHANGED: Added parser import
+
+# PROD CHAIN (REPLACE OLD CODE - BETTER) #CHANGED: Complete replacement
+prompt = ChatPromptTemplate.from_messages([ #CHANGED: Changed 'template' → 'prompt'
+    ("system", "act as helpful assistant and translate {ip_language} into {op_language}"),
+    MessagesPlaceholder(variable_name="history"),  # Chat history support #NEW
+    ("user", "{text}")
+])
+chain = prompt | model | StrOutputParser()  # 1 invoke = clean string #CHANGED: prompt vs template
+
+# SINGLE TURN (no history needed) #CHANGED: chain.invoke() vs model.invoke()
+response = chain.invoke({
+    "ip_language": "english",
+    "op_language": "marathi", 
+    "text": "i am king of world",
+    "history": [] #NEW: history param
+})
+print(response)  # Clean string ✅ No .content needed #CHANGED: No .content
+
+#######################################################################################
+# HOW PROMPTS LOOK U CAN SEE BY BELOW CODE #CHANGED: prompt vs ready_prompt
+print(prompt)  # Shows structure with placeholders
+# Output: ChatPromptTemplate: system+MessagesPlaceholder('history')+user #CHANGED
+
+#######################################################################################
+### HOW I/P VAR LOOKS CHECK BY BELOW CODE
+print(prompt.input_variables) #CHANGED: prompt vs my_prompt
+--------->
+['ip_language', 'op_language', 'text', 'history']  # Added history var #CHANGED
+
+# OLD WAY (3 lines → messy): my_prompt.format() → model.invoke() → .content #NEW: Added explanation
+# NEW WAY (1 line → clean): chain.invoke(dict) #NEW: Added explanation
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
+BELOW NOTES IS FORM NEUROVED OLD 42 VIDEO OF 7 TH VODEO AND NEW 21 TH VIDEO ADDED PARSER AND 
+MESSAGEPLACEHOLDER EXTRA THEN OLD 7 TH BUT IN PROD ABOVE CODE IS PERFECT PROD READY USE ABOVE ONLY----------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+
 from langchain_core.prompts import PromptTemplate
 
 1          my_prompt=             PromptTemplate(
